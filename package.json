@@ -1,0 +1,45 @@
+{
+  "name": "postcss-property-groups",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "tsnd src/*.test.ts",
+    "test:tdd": "tsnd --respawn src/*.test.ts",
+    "prepack": "rollup --config rollup.config.js --bundleConfigAsCjs"
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "types": "dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      }
+    }
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "postcss": "8.4.33"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "6.1.0",
+    "@types/node": "20.11.4",
+    "rollup": "4.9.5",
+    "rollup-plugin-ts": "3.4.5",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.3.3"
+  },
+  "keywords": [
+    "postcss",
+    "postcss plugin",
+    "plugin"
+  ]
+}

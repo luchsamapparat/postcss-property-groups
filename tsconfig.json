@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "outDir": "lib",
+    "strict": true
+  },
+  "include": ["src"],
+  "exclude": ["src/*test.ts"]
+}
