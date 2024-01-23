@@ -2,6 +2,8 @@
   "name": "postcss-property-groups",
   "version": "0.0.1",
   "license": "MIT",
+  "author": "Marvin Luchs <marvin@luchs.org>",
+  "repository": "github:luchsamapparat/postcss-property-groups",
   "scripts": {
     "build": "rollup --config rollup.config.js --bundleConfigAsCjs",
     "version": "changeset version && npm i",
@@ -24,6 +26,9 @@
     }
   },
   "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
     "dist/**/*"
   ],
   "dependencies": {
