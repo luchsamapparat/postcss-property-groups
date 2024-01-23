@@ -1,6 +1,6 @@
 {
   "name": "postcss-property-groups",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "build": "rollup --config rollup.config.js --bundleConfigAsCjs",
