@@ -1,16 +1,8 @@
 # postcss-property-groups
 
-[![Build][build]][build-badge]
-
-> PostCSS plugin template.
-
-Brief description describing the purpose of the [PostCSS](https://github.com/postcss/postcss) plugin.
-
 ## Install
 
 ```bash
-yarn add -D postcss-property-groups
-# OR
 npm i -D postcss-property-groups
 ```
 
@@ -36,12 +28,7 @@ postcss(plugin)
 ```ts
 plugin(options?: Options);
 
-interface Options {
-  /**
-   * Relative path to processed HTML file
-   */
-  path?: string;
-}
+interface Options {}
 ```
 
 ## Changelog
