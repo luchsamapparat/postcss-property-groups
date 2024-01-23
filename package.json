@@ -1,10 +1,8 @@
 {
   "name": "postcss-property-groups",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "test": "tsnd src/*.test.ts",
-    "test:tdd": "tsnd --respawn src/*.test.ts",
     "prepack": "rollup --config rollup.config.js --bundleConfigAsCjs"
   },
   "type": "module",
@@ -34,7 +32,6 @@
     "@types/node": "20.11.4",
     "rollup": "4.9.5",
     "rollup-plugin-ts": "3.4.5",
-    "ts-node-dev": "2.0.0",
     "typescript": "5.3.3"
   },
   "keywords": [
