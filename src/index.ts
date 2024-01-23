@@ -2,13 +2,12 @@ import { Declaration, Rule, type Plugin } from "postcss";
 
 const declarations = new Map<string, string[]>();
 
-function postcssPropertyGroups(options: unknown = {}): Plugin {
+function postcssPropertyGroups(): Plugin {
   return {
     postcssPlugin: 'postcss-property-groups',
-    prepare(result) {
+    prepare() {
       function getPropertyGroupDeclarations(propertyGroupName: string) {
         if (!declarations.has(propertyGroupName)) {
-          // console.log(`❓ Unknown property group ${propertyGroupName}, creating new declarations`);
           declarations.set(propertyGroupName, []);
         }
 
@@ -17,7 +16,7 @@ function postcssPropertyGroups(options: unknown = {}): Plugin {
 
       return {
         AtRule: {
-          'property-group': (atRule, helper) => {
+          'property-group': atRule => {
             const params = atRule.params.split(' ');
 
             const propertyGroupName = params.pop();
@@ -33,7 +32,8 @@ function postcssPropertyGroups(options: unknown = {}): Plugin {
               selector,
               nodes: atRule.nodes.map(node => {
                 if (node.type !== 'decl') {
-                  throw new Error(`${node} is not a CSS declaration.`);
+                  // throw new Error(`${node} is not a CSS declaration.`);
+                  return node;
                 }
 
                 propertyGroupDeclarations.push(node.prop);
@@ -44,18 +44,14 @@ function postcssPropertyGroups(options: unknown = {}): Plugin {
                 })
               })
             }));
-
-            // console.log(`🆕 new property group --${propertyGroupName} with properties ${propertyGroupDeclarations.join(', ')}`)
           }
         },
         Declaration: {
-          'apply-property-group': (decl, helper) => {
+          'apply-property-group': decl => {
             const propertyGroupNames = decl.value.split(' ').map(name => name.trim());
 
             const propertyGroupProps = propertyGroupNames.flatMap(propertyGroupName => {
               const propertyGroupDeclarations = getPropertyGroupDeclarations(propertyGroupName);
-
-              // console.log(`✅ applying ${propertyGroupName} with ${propertyGroupDeclarations.length} properties ${propertyGroupDeclarations.join(', ')}`)
 
               const props = propertyGroupDeclarations.map(prop => ({
                 prop,
