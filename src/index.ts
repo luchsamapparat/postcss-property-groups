@@ -22,7 +22,7 @@ function postcssPropertyGroups(): Plugin {
             const propertyGroupName = params.pop();
             const selector = params.join(' ');
 
-            if (propertyGroupName === undefined || !propertyGroupName?.startsWith('--')) {
+            if (propertyGroupName === undefined || !propertyGroupName.startsWith('--')) {
               throw new Error(`Invalid property group name: ${propertyGroupName}`);
             }
 
@@ -41,7 +41,7 @@ function postcssPropertyGroups(): Plugin {
                 return new Declaration({
                   prop: `${propertyGroupName}-${node.prop}`,
                   value: node.value
-                })
+                });
               })
             }));
           }
@@ -50,18 +50,14 @@ function postcssPropertyGroups(): Plugin {
           'apply-property-group': decl => {
             const propertyGroupNames = decl.value.split(' ').map(name => name.trim());
 
-            const propertyGroupProps = propertyGroupNames.flatMap(propertyGroupName => {
+            decl.replaceWith(...propertyGroupNames.flatMap(propertyGroupName => {
               const propertyGroupDeclarations = getPropertyGroupDeclarations(propertyGroupName);
 
-              const props = propertyGroupDeclarations.map(prop => ({
+              return propertyGroupDeclarations.map(prop => ({
                 prop,
                 value: `var(${propertyGroupName}-${prop})`
               }));
-
-              return props;
-            });
-
-            decl.replaceWith(...propertyGroupProps);
+            }));
           }
         }
       }
